@@ -138,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
                 continue
             key, value = param.split('=', 1)
             # if the value is basestrin
-            if value.startwith('"') and value.endwith('"'):
+            if value.startswith('"') and value.endswith('"'):
                 value = value[1:-1].replace('\\"', '"').replace('_', ' ')
             # if the value is float
             elif '.' in value:
