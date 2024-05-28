@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from sqlalchemy import create_engine
 import os
 from models.base_model import Base
