@@ -6,7 +6,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 class DBStorage:
     """Interacts with the MySQL database"""
-
     __engine = None
     __session = None
 
@@ -32,6 +31,13 @@ class DBStorage:
                 key = obj.__class__.__name__ + '.' + obj.id
                 new_dict[key] = obj
         else:
+            from models.state import State
+            from models.city import City
+            from models.user import User
+            from models.place import Place
+            from models.review import Review
+            from models.amenity import Amenity
+
             classes = [User, State, City, Amenity, Place, Review]
             for cls in classes:
                 objects = self.__session.query(cls).all()
