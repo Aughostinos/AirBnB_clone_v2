@@ -3,7 +3,7 @@
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
             if _cmd not in HBNBCommand.dot_cmds:
                 raise Exception
 
-            # if parantheses contain arguments, parse them
+            # if parentheses contain arguments, parse them
             pline = pline[pline.find('(') + 1:pline.find(')')]
             if pline:
                 # partition args: (<id>, [<delim>], [<*args>])
@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] == '{' and pline[-1] =='}'\
+                    if pline[0] == '{' and pline[-1] == '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -190,14 +190,15 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            print(storage._FileStorage__objects[key])
+            print(storage.all()[key])
         except KeyError:
             print("** no instance found **")
 
     def help_show(self):
-        """ Help information for the show command """
+        """Help information for the show command"""
         print("Shows an individual instance of a class")
         print("[Usage]: show <className> <objectId>\n")
+
     def do_destroy(self, args):
         """Destroys a specified object"""
         new = args.partition(" ")
@@ -268,7 +269,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """Updates a certain object with new info"""
-        c_name = c_id = att_name = att_val = kwargs = ''
+        c_name = c_id = att_name = att_val = kwargs =
 
         # isolate cls from id/args, ex: (<cls>, delim, <id/args>)
         args = args.partition(" ")

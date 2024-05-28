@@ -7,7 +7,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 class DBStorage:
     """Interacts with the MySQL database"""
 
-    # private class attributes
     __engine = None
     __session = None
 
@@ -30,7 +29,6 @@ class DBStorage:
         if cls:
             objects = self.__session.query(cls).all()
             for obj in objects:
-                # key construction
                 key = obj.__class__.__name__ + '.' + obj.id
                 new_dict[key] = obj
         else:
@@ -38,7 +36,6 @@ class DBStorage:
             for cls in classes:
                 objects = self.__session.query(cls).all()
                 for obj in objects:
-                    # key construction
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
         return new_dict
