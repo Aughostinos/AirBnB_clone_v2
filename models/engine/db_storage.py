@@ -1,9 +1,19 @@
 #!/usr/bin/python3
 from sqlalchemy import create_engine
 import os
-from models.base_model import Base
 from sqlalchemy.orm import scoped_session, sessionmaker
+from models.base_model import Base
+from models.amenity import Amenity
+from models.base_model import Base
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
+
+classes = {"User": User, "State": State, "City": City,
+           "Amenity": Amenity, "Place": Place, "Review": Review}
 class DBStorage:
     """new engine"""
 
@@ -35,7 +45,6 @@ class DBStorage:
                 key = obj.__class__.__name__ + '.' + obj.id
                 new_dict[key] = obj
         else:
-            classes = [User, State, City, Amenity, Place, Review]
             for cls in classes:
                 objects = self.__session.query(cls).all()
                 for obj in objects:
