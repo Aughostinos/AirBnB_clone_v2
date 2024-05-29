@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
-        exit()
+        return True
 
     def help_quit(self):
         """ Prints the help documentation for quit  """
@@ -102,8 +102,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """ Handles EOF to exit program """
-        print()
-        exit()
+        print("")
+        return True
 
     def help_EOF(self):
         """ Prints the help documentation for EOF """
@@ -151,15 +151,10 @@ class HBNBCommand(cmd.Cmd):
                     continue
             # Set attributes
             setattr(new_instance, key, value)
-        
+
         # Save the new instance
         new_instance.save()
         print(new_instance.id)
-        
-        # Verify that the object is created with the expected attributes
-        for key, value in new_instance.__dict__.items():
-            if key != "_sa_instance_state":
-                print(f"{key}: {value}")
 
     def help_create(self):
         """Help information for the create method"""
@@ -236,7 +231,7 @@ class HBNBCommand(cmd.Cmd):
         """Shows all objects, or all objects of a class"""
         print_list = []
         if args:
-            args = args.split(' ')[0]  # remove possible trailing args
+            args = args.split(' ')[0]
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
