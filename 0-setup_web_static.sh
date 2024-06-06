@@ -11,8 +11,14 @@ fi
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
 
-# Create a fake HTML file using sed
-sudo sed -i '1iFake HTML File' /data/web_static/releases/test/index.html
+# Create a fake HTML file
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" > /data/web_static/releases/test/index.html
 
 # Create a symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
@@ -22,7 +28,27 @@ sudo chown -R ubuntu /data/
 sudo chgrp -R ubuntu /data/
 
 # Update Nginx configuration
-sudo sed -i '23i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-enabled/default
+nginx_config="server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location /hbnb_static/ {
+        alias /data/web_static/current/;
+        autoindex off;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}"
+
+# Write Nginx configuration to the default file
+echo "$nginx_config" | sudo tee /etc/nginx/sites-available/default
 
 # Restart Nginx
 sudo systemctl restart nginx
