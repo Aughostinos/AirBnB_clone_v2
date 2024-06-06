@@ -51,5 +51,3 @@ sudo echo "$nginx_config" > /etc/nginx/sites-available/default
 
 # Restart Nginx
 sudo systemctl restart nginx
-
-exit 0
