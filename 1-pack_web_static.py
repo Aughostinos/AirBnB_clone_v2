@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from fabric.api import local
 
+
 def do_pack():
     """
     Compress before sending
@@ -13,7 +14,8 @@ def do_pack():
 
     # Create the archive name
     now = datetime.now()
-    archive_name = "versions/web_static_{}.tgz".format(now.strftime("%Y%m%d%H%M%S"))
+    archive_name = "versions/web_static_{}.tgz".format(now.strftime(
+                                                        "%Y%m%d%H%M%S"))
 
     # Create the archive
     command = "tar -cvzf {} web_static".format(archive_name)
