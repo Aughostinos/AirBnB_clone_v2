@@ -18,7 +18,7 @@ echo "<html>
   <body>
     Holberton School
   </body>
-</html>" | sudo tee /data/web_static/releases/test/index.html
+</html>" > /data/web_static/releases/test/index.html
 
 # Create a symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
@@ -33,7 +33,7 @@ nginx_config="server {
    
 
     location /hbnb_static/ {
-        root /data/web_static/current/;
+        alias /data/web_static/current/;
         index index.html index.htm;
     }
 
