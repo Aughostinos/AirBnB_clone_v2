@@ -30,16 +30,15 @@ sudo chown -R ubuntu:ubuntu /data/
 nginx_config="server {
     listen 80 default_server;
     listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /data/web_static/;
+    index  index.html index.htm;
    
-
-    location /hbnb_static/ {
+    location /hbnb_static {
         alias /data/web_static/current/;
-       autoindex off;
-    }
+        index index.html index.htm;
+}
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
 }"
 
 # Nginx configuration to the default file
