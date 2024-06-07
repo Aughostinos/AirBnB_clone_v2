@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """Fabric script that distributes an archive to your web servers"""
-from fabric import Connection, task
+from fabric.api import *
 import os
 
-env_hosts = ['52.3.249.236_web_01', '100.25.20.88_web_02']
+env.hosts = ['52.3.249.236_web_01', '100.25.20.88_web_02']
+env.user = 'ubuntu'
+env.key_filename = '~/.ssh/school'
 
 
 def do_deploy(archive_path):
