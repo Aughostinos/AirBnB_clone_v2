@@ -18,11 +18,8 @@ echo "<html>
   <body>
     Holberton School
   </body>
-<<<<<<< HEAD
 </html>" >  sudo tee /data/web_static/releases/test/index.html
-=======
-</html>" > /data/web_static/releases/test/index.html
->>>>>>> c725f388793ea65bd93793434d1038dcf2ae591b
+
 
 # Create a symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
@@ -31,26 +28,8 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
 # Update Nginx configuration
-<<<<<<< HEAD
+
 sudo sed -i '/server_name _;/a \ \n\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}' /etc/nginx/sites-available/default
-=======
-nginx_config="server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /data/web_static/;
-    index  index.html index.htm;
-   
-    location /hbnb_static {
-        alias /data/web_static/current/;
-        index index.html index.htm;
-}
-
-}"
-
-# Nginx configuration to the default file
-sudo echo "$nginx_config" > /etc/nginx/sites-available/default
->>>>>>> c725f388793ea65bd93793434d1038dcf2ae591b
 
 # Restart Nginx
 sudo systemctl restart nginx
