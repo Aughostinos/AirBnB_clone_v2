@@ -3,7 +3,7 @@
 from fabric.api import *
 import os
 
-env.hosts = ['52.3.249.236_web_01', '100.25.20.88_web_02']
+env.hosts = ['54.209.116.255', '52.91.144.185']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/school'
 
