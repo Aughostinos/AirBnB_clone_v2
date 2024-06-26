@@ -20,9 +20,9 @@ def display_hbnb():
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def display_Ctext():
+def display_c_text(text):
     """display C followed by varibale text"""
-    text = text.replace('_',' ')
+    text = text.replace('_', ' ')
     return 'C {}'.format(text)
 
 
