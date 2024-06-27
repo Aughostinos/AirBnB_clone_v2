@@ -11,10 +11,11 @@ class FileStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls is None:
-             return FileStorage.__objects
-  
+            return FileStorage.__objects
+
         dict_view = FileStorage.__objects.items()
-        return {key: val for key, val in dict_view if isinstance(val, cls)}     
+        return {key: val for key, val in dict_view if isinstance(val, cls)}
+
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
@@ -39,28 +40,27 @@ class FileStorage:
         from models.review import Review
 
         classes = {
-                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
-                    'State': State, 'City': City, 'Amenity': Amenity,
-                    'Review': Review
-                  }
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }
         try:
             temp = {}
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
     def delete(self, obj=None):
         """delete obj from __objects"""
         if obj == None:
-                return
-        
+            return
+
         obj_key = obj.to_dict()['__class__'] + '.' + obj.id
         if obj_key in FileStorage.__objects:
-             del FileStorage.__objects[obj_key]
-
+            del FileStorage.__objects[obj_key]
 
     def close(self):
         """call reload() method for deserializing the JSON file to objects"""
