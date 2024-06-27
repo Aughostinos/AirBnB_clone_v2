@@ -1,4 +1,7 @@
-# models/engine/db_storage.py
+#!/usr/bin/python3
+"""
+Contains the DBStorage class
+"""
 
 from sqlalchemy import create_engine
 import os
