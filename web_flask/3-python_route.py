@@ -26,13 +26,6 @@ def display_c_text(text):
     return 'C {}'.format(text)
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def display_c_text(text):
-    """display C followed by varibale text"""
-    text = text.replace('_', ' ')
-    return 'C {}'.format(text)
-
-
 @app.route('/python/<text>', strict_slashes=False)
 def display_py_text(text='is cool'):
     """display Python followed by varibale text"""
