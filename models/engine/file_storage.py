@@ -19,8 +19,16 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """returns the dictionary __objects"""
+        if cls:
+            if isinstance(cls, str):
+                cls = eval(cls)
+            new_dict = {}
+            for key, value in self.__objects.items():
+                if isinstance(value, cls):
+                    new_dict[key] = value
+            return new_dict
         return self.__objects
 
     def new(self, obj):

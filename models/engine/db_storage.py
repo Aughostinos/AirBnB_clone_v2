@@ -44,8 +44,7 @@ class DBStorage:
                 self.__session.query(Review).all()
         else:
             objs = self.__session.query(cls).all()
-        return {"{}.{}".format(
-            type(obj).__name__, obj.id): obj for obj in objs}
+        return {"{}.{}".format(type(obj).__name__, obj.id): obj for obj in objs}
 
     def new(self, obj):
         """add the object to the current database session"""
@@ -71,4 +70,3 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
-        self.reload()
