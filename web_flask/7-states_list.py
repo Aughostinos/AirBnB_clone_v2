@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """web flask module"""
-from flask import Flask, render_template
 from models import storage
 from models.state import State
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
-@app.route('/states_list', strictslashes=False)
+@app.route('/states_list', strict_slashes=False)
 def state_list():
     """Displays a HTML page with the list of all State"""
     states = storage.all(State).values()
